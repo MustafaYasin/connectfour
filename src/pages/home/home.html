@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      TicTacToe
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <div padding><ion-item color="light">
+      RoteSteine: {{anzSteineRot}}</ion-item><ion-item color="light">
+      GelbeSteine: {{anzSteineGelb}}</ion-item></div>
+    <ion-item *ngIf="status==SpielPhasen.Laeuft" color="light">Nächster Zug:  {{aktSpieler}}</ion-item>
+    <ion-item *ngIf="status==SpielPhasen.Unentschieden" color="dark">Unentschieden!</ion-item>
+    <ion-item *ngIf="status==SpielPhasen.GewonnenR" color="danger">r hat gewonnen</ion-item>
+    <ion-item *ngIf="status==SpielPhasen.GewonnenG" color="danger">g hat gewonnen</ion-item>
+  </ion-list>
+
+<!--
+    <div class="spielfeld" text-center padding>
+    <div>
+      <button ion-button outline color="dark" (click)="feldClick(0,0)">{{spielFeld[0][0]}}</button><button ion-button outline color="dark" (click)="feldClick(0,1)">{{spielFeld[0][1]}}</button><button ion-button outline color="dark" (click)="feldClick(0,2)">{{spielFeld[0][2]}}</button>
+    </div>
+    <div>
+      <button ion-button outline color="dark" (click)="feldClick(1,0)">{{spielFeld[1][0]}}</button><button ion-button outline color="dark" (click)="feldClick(1,1)">{{spielFeld[1][1]}}</button><button ion-button outline color="dark" (click)="feldClick(1,2)">{{spielFeld[1][2]}}</button>
+    </div>
+    <div>
+      <button ion-button outline color="dark" (click)="feldClick(2,0)">{{spielFeld[2][0]}}</button><button ion-button outline color="dark" (click)="feldClick(2,1)">{{spielFeld[2][1]}}</button><button ion-button outline color="dark" (click)="feldClick(2,2)">{{spielFeld[2][2]}}</button>
+    </div>
+  </div>
+  -->
+   <div padding>
+    <button ion-button (click)="userZug(0)" [disabled]="spalteVoll(0)">1</button>
+    <button ion-button (click)="userZug(1)" [disabled]="spalteVoll(1)">2</button>
+    <button ion-button (click)="userZug(2)" [disabled]="spalteVoll(2)">3</button>
+    <button ion-button (click)="userZug(3)" [disabled]="spalteVoll(3)">4</button>
+    <button ion-button (click)="userZug(4)" [disabled]="spalteVoll(4)">5</button>
+    <button ion-button (click)="userZug(5)" [disabled]="spalteVoll(5)">6</button>
+    <button ion-button (click)="userZug(6)" [disabled]="spalteVoll(6)">7</button>
+
+  </div>
+    <div class="spielfeld" text-center padding>
+    <div *ngFor="let zeile of spielFeld; let zIdx=index">
+      <div class="einzelfeld" *ngFor="let element of zeile; let sIdx=index"
+           
+           [style.backgroundColor]="feldHintergrundFarbe(zIdx,sIdx)">{{element}}</div>
+    </div>
+  </div>
+
+
+
+<div padding *ngIf="status!=SpielPhasen.Laeuft">
+    <button ion-button block outline color="secondary" (click)="neuesSpiel()">Neues Spiel</button>
+  </div>
+
+</ion-content>
